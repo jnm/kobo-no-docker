@@ -10,6 +10,8 @@ minimum of mandatory customization.
 
 ## to do
 - [x] ~~celery always eager~~ done!
+- [ ] enketo bad news `Parse Error: Expected HTTP/`
+    * sometimes goes away after refreshing(?!)
 
 ## oh no :scream:
 some changes are currently needed to the kpi and kobocat codebases.
@@ -21,8 +23,8 @@ apply them with `git apply`; e.g. in your `kpi` source directory, run
 1. clone https://github.com/kobotoolbox/kpi and
    https://github.com/kobotoolbox/kobocat if you haven't already
 1. `docker-compose up`, which should yield:
-    * enketo, on 10.6.6.1:9002
-    * postgres running on 10.6.6.1:60666
+    * enketo running on 10.6.6.1:9002
+    * postgres, on 10.6.6.1:60666
     * redis, on 10.6.6.1:60667
     * mongo, on 10.6.6.1:60668
 1. `virtualenv kpienv && virtualenv kcenv`
@@ -96,8 +98,6 @@ apply them with `git apply`; e.g. in your `kpi` source directory, run
         1. you'll also have to recreate user accounts
 
 ## nasties
-* enketo bad news `Parse Error: Expected HTTP/`
-    * sometimes goes away after refreshing(?!)
 * periodic tasks (`celery beat`) are completely ignored for the sake of
   simplicity
 * `apt-get install gdal-bin` on the host unavoidable?

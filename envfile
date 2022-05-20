@@ -2,6 +2,7 @@ export IP=10.6.6.1
 
 export DJANGO_SECRET_KEY=insecure-django-kobo-dev
 export DJANGO_DEBUG=True
+export SKIP_CELERY=True
 
 export REDIS_SESSION_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/0
 export KPI_BROKER_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/1

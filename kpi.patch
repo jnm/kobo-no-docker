@@ -1,0 +1,27 @@
+diff --git a/dependencies/pip/dev_requirements.txt b/dependencies/pip/dev_requirements.txt
+index 60b3b08ba..8bd9d20e1 100644
+--- a/dependencies/pip/dev_requirements.txt
++++ b/dependencies/pip/dev_requirements.txt
+@@ -289,7 +289,7 @@ prompt-toolkit==3.0.29
+     # via
+     #   click-repl
+     #   ipython
+-psycopg2==2.8.6
++psycopg2-binary==2.8.6
+     # via -r dependencies/pip/requirements.in
+ ptyprocess==0.7.0
+     # via pexpect
+diff --git a/kobo/settings/base.py b/kobo/settings/base.py
+index 9f41eeeb7..039b4977b 100644
+--- a/kobo/settings/base.py
++++ b/kobo/settings/base.py
+@@ -322,7 +322,8 @@ SKIP_HEAVY_MIGRATIONS = env.bool('SKIP_HEAVY_MIGRATIONS', False)
+ # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
+ 
+ DATABASES = {
+-    'default': env.db(default="sqlite:///%s/db.sqlite3" % BASE_DIR),
++    # NOCOMMIT
++    'default': env.db('KPI_DATABASE_URL', default="sqlite:///%s/db.sqlite3" % BASE_DIR),
+ }
+ if 'KC_DATABASE_URL' in os.environ:
+     DATABASES['kobocat'] = env.db_url('KC_DATABASE_URL')

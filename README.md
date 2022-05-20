@@ -2,14 +2,24 @@
 *fighting complexity with simplicity*
 
 ## goal
-As a developer, I would like to run things I don't change inside Docker (PostgreSQL, Redis, MongoDB, and—for now—Enketo Express).
-I would like full, manual control over running code that I do change (kpi Python, kpi JS, kobocat Python).
-I would like simplicity in configuration with sensible defaults and a minimum of mandatory customization.
+As a developer, I would like to run things I don't change inside Docker
+(PostgreSQL, Redis, MongoDB, and—for now—Enketo Express). I would like full,
+manual control over running code that I do change (kpi Python, kpi JS, kobocat
+Python). I would like simplicity in configuration with sensible defaults and a
+minimum of mandatory customization.
 
 ## to do
 - [x] ~~celery always eager~~ done!
 
+## oh no :scream:
+some changes are currently needed to the kpi and kobocat codebases.
+`kpi.patch` and `kobocat.patch` in this repository contain those changes.
+apply them with `git apply`; e.g. in your `kpi` source directory, run
+`git apply < /path/to/kobo-no-docker/kpi.patch`. sorry.
+
 ## getting started
+1. clone https://github.com/kobotoolbox/kpi and
+   https://github.com/kobotoolbox/kobocat if you haven't already
 1. `docker-compose up`, which should yield:
     * enketo, on 10.6.6.1:9002
     * postgres running on 10.6.6.1:60666

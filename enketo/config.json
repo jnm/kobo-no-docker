@@ -1,0 +1,25 @@
+{
+    "encryption key": "insecure-enketo-kobo-dev",
+    "ip filtering": {
+        "allowIPAddressList": [],
+        "allowMetaIPAddress": false,
+        "allowPrivateIPAddress": true,
+        "denyAddressList": []
+    },
+    "linked form and data server": {
+        "api key": "insecure-enketo-kobo-dev",
+        "server url": ""
+    },
+    "redis": {
+        "cache": {
+            "host": "10.6.6.1",
+            "password": "insecure-redis-kobo-dev",
+            "port": "60667"
+        },
+        "main": {
+            "host": "10.6.6.1",
+            "password": "insecure-redis-kobo-dev",
+            "port": "60667"
+        }
+    }
+}

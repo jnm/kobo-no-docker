@@ -1,0 +1,36 @@
+export IP=10.6.6.1
+
+export DJANGO_SECRET_KEY=insecure-django-kobo-dev
+export DJANGO_DEBUG=True
+
+export REDIS_SESSION_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/0
+export KPI_BROKER_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/1
+export KOBOCAT_BROKER_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/10
+
+export KOBOFORM_URL="http://$IP:9000"
+export KOBOFORM_URL="$KOBOFORM_INTERNAL_URL"
+
+export KOBOCAT_INTERNAL_URL="http://$IP:9001"
+export KOBOCAT_URL="$KOBOCAT_INTERNAL_URL"
+
+export ENKETO_INTERNAL_URL="http://$IP:9002"
+export ENKETO_URL="$ENKETO_INTERNAL_URL"
+export ENKETO_API_TOKEN=insecure-enketo-kobo-dev
+
+export KPI_DATABASE_URL=postgis://postgres:insecure-postgres-kobo-dev@10.6.6.1:60666/koboform
+export KC_DATABASE_URL=postgis://postgres:insecure-postgres-kobo-dev@10.6.6.1:60666/kobocat
+
+export EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
+
+export KPI_MONGO_HOST=10.6.6.1
+export KPI_MONGO_PORT=60668
+export KPI_MONGO_USER=kobo
+export KPI_MONGO_PASS=insecure-mongo-kobo-dev
+# The default is fine
+# export KPI_MONGO_NAME=formhub
+export KOBOCAT_MONGO_HOST="$KPI_MONGO_HOST"
+export KOBOCAT_MONGO_PORT="$KPI_MONGO_PORT"
+export KOBOCAT_MONGO_USER="$KPI_MONGO_USER"
+export KOBOCAT_MONGO_PASS="$KPI_MONGO_PASS"
+
+# Is SSRF configuration needed to allow 10.x private addresses?

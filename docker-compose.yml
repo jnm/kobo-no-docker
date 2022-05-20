@@ -1,0 +1,83 @@
+version: "3.7"
+
+services:
+  postgres:
+    image: postgis/postgis:14-3.2
+    environment:
+      POSTGRES_PASSWORD: insecure-postgres-kobo-dev
+    volumes:
+      - ./storage/postgres:/var/lib/postgresql/data
+      # Used to create two databases; see
+      # https://github.com/docker-library/docs/tree/b56d2dd13bee760cb7a569969f0f7d0c71e1f637/postgres#initialization-scripts
+      - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    networks:
+      default:
+        ipv4_address: 10.6.6.6
+    ports:
+      - 10.6.6.1:60666:5432
+
+  redis:
+    image: redis
+    volumes:
+      - ./storage/redis:/data
+    command: --requirepass insecure-redis-kobo-dev
+    networks:
+      default:
+        ipv4_address: 10.6.6.7
+    ports:
+      - 10.6.6.1:60667:6379
+
+  mongo:
+    image: mongo:5.0.8
+    environment:
+      # HELLO: the root user only gets created in the `admin` database and
+      # cannot authenticate to other databases like `formhub`
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: insecure-mongo-kobo-dev
+      MONGO_INITDB_DATABASE: formhub
+    volumes:
+      - ./storage/mongo:/data/db
+      # Used to grant access to `formhub` database by user `kobo`
+      # with password `insecure-mongo-kobo-dev`
+      - ./mongo/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    networks:
+      default:
+        ipv4_address: 10.6.6.8
+    ports:
+      - 10.6.6.1:60668:27017
+
+  enketo:
+    image: kobotoolbox/enketo-express-extra-widgets:3.1.0
+    depends_on:
+      - redis
+    volumes:
+      - ./enketo/config.json:/srv/src/enketo_express/config/config.json
+    ports:
+      - "10.6.6.1:9002:8005"
+    networks:
+      default:
+        ipv4_address: 10.6.6.9
+    # In the future, we may use environment variables for configuration
+    # instead of `config.json`. But not right now :)
+    #
+    # # Bypass the default command, which requires a `config.json`
+    # command: node app.js
+    # environment:
+    #   ENKETO_PORT: 60669
+    #   # Enketo does not seem to respect the database number
+    #   ENKETO_REDIS_MAIN_URL: "redis://:insecure-redis-kobo-dev@10.6.6.7:60667/20"
+    #   ENKETO_REDIS_CACHE_URL: "redis://:insecure-redis-kobo-dev@10.6.6.7:60667/21"
+    #   ENKETO_LINKED_FORM_AND_DATA_SERVER_API_KEY: insecure-enketo-kobo-dev
+    #   ENKETO_LINKED_FORM_AND_DATA_SERVER_AUTHENTICATION_ALLOW_INSECURE_TRANSPORT: "true"
+    #   # This looks like it doesn't work at all
+    #   ENKETO_IP_FILTERING_ALLOWPRIVATEIPADDRESS: "true"
+    #   # In the future, once it's supported, set something like
+    #   #   ENKETO_MAX_PROCESSES: 2
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.6.6.0/24

@@ -25,3 +25,17 @@ index 9f41eeeb7..039b4977b 100644
  }
  if 'KC_DATABASE_URL' in os.environ:
      DATABASES['kobocat'] = env.db_url('KC_DATABASE_URL')
+diff --git a/package.json b/package.json
+index 8dc0d26e9..6ec7293e0 100644
+--- a/package.json
++++ b/package.json
+@@ -103,7 +106,7 @@
+     "lint": "eslint \"jsapp/js/**/*\" --ext .es6,.js,.jsx,.ts,.tsx",
+     "show-icons": "opn jsapp/fonts/k-icons.html",
+     "generate-icons": "node ./scripts/generate_icons.js",
+-    "copy-fonts": "python ./scripts/copy_fonts.py && npm run generate-icons"
++    "copy-fonts": "python3 ./scripts/copy_fonts.py && npm run generate-icons"
+   },
+   "repository": "https://github.com/kobotoolbox/kpi.git",
+   "author": "alex.dorey@kobotoolbox.org, esmail.fadae@kobotoolbox.org, john.milner@kobotoolbox.org",
+

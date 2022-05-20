@@ -14,10 +14,13 @@ minimum of mandatory customization.
     * sometimes goes away after refreshing(?!)
 
 ## oh no :scream:
-some changes are currently needed to the kpi and kobocat codebases.
-`kpi.patch` and `kobocat.patch` in this repository contain those changes.
-apply them with `git apply`; e.g. in your `kpi` source directory, run
-`git apply < /path/to/kobo-no-docker/kpi.patch`. sorry.
+* some changes are currently needed to the kpi and kobocat codebases.
+  `kpi.patch` and `kobocat.patch` in this repository contain those changes.
+  apply them with `git apply`; e.g. in your `kpi` source directory, run `git
+  apply < /path/to/kobo-no-docker/kpi.patch`. sorry.
+* you have to manually create the directory `jsapp/compiled` inside your `kpi`
+  source directory, otherwise `npm run watch` will fail on
+  `ExtractTranslationKeysPlugin` with a `ENOENT`
 
 ## getting started
 1. clone https://github.com/kobotoolbox/kpi and
@@ -29,7 +32,9 @@ apply them with `git apply`; e.g. in your `kpi` source directory, run
     * mongo, on 10.6.6.1:60668
 1. `virtualenv kpienv && virtualenv kcenv`
     * tested with `CPython3.8.10.final.0-64`
-1. install os-level dependencies (sorry): `apt-get install gdal-bin`
+1. install os-level dependencies (sorry): `apt-get install python3-virtualenv gcc python3-dev gdal-bin`
+    * you'll also need docker and docker-compose; tested with docker 20.10.12,
+      docker-compose 1.25.0
 1. set up a kpi (python) development environment!
     1. open a new terminal
     1. `. kpienv/bin/activate`
@@ -60,7 +65,7 @@ apply them with `git apply`; e.g. in your `kpi` source directory, run
     1. `. kcenv/bin/activate`
     1. `. envfile`
     1. `pip install pip-tools`
-    1. `cd` into your kpi source directory
+    1. `cd` into your kobocat source directory
     1. `pip-sync dependencies/pip/dev.txt`
         * HEY! how about we make that consistent with kpi, eh?
     1. `./manage.py migrate`
@@ -101,6 +106,10 @@ apply them with `git apply`; e.g. in your `kpi` source directory, run
 * periodic tasks (`celery beat`) are completely ignored for the sake of
   simplicity
 * `apt-get install gdal-bin` on the host unavoidable?
+* "`pyuwsgi` is the exact same code as `uwsgi` but" actually has binary wheels?
+    * it'd sure be nice not to compile uwsgi from source
+        * then we could remove `gcc` and `python3-dev` requirements
+    * https://github.com/unbit/uwsgi/issues/1218#issuecomment-463681335
 * kpi copy fonts calls `python` not `python3` (fails; i have only `python2` and `python3`)
 * the wizard has not included a full inventory of his workshop
     * eslint not installed by `npm install` in kpi

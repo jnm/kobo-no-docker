@@ -1,5 +1,5 @@
 # kobo (some) docker
-*fighting complexity with simplicity*
+*fighting complexity ~~with simplicity~~ by making humans do more work*
 
 ## goal
 As a developer, I would like to run things I don't change inside Docker

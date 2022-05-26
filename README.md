@@ -10,8 +10,8 @@ minimum of mandatory customization.
 
 ## to do
 - [x] ~~celery always eager~~ done!
-- [ ] enketo bad news `Parse Error: Expected HTTP/`
-    * sometimes goes away after refreshing(?!)
+- [x] enketo bad news `Parse Error: Expected HTTP/`
+    * should be fixed by https://github.com/kobotoolbox/kpi/pull/3828
 
 ## oh no :scream:
 * some changes are currently needed to the kpi and kobocat codebases.

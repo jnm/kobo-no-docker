@@ -34,4 +34,6 @@ export KOBOCAT_MONGO_PORT="$KPI_MONGO_PORT"
 export KOBOCAT_MONGO_USER="$KPI_MONGO_USER"
 export KOBOCAT_MONGO_PASS="$KPI_MONGO_PASS"
 
+export DJANGO_LANGUAGE_CODES="en fr es ar zh-hans hi ku"
+
 # Is SSRF configuration needed to allow 10.x private addresses?

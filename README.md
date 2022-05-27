@@ -12,6 +12,7 @@ minimum of mandatory customization.
 - [x] ~~celery always eager~~ done!
 - [x] enketo bad news `Parse Error: Expected HTTP/`
     * should be fixed by https://github.com/kobotoolbox/kpi/pull/3828
+    * apparently not completely? try opening offline form in a new tab
 
 ## oh no :scream:
 * some changes are currently needed to the kpi and kobocat codebases.
@@ -32,7 +33,7 @@ minimum of mandatory customization.
     * mongo, on 10.6.6.1:60668
 1. `virtualenv kpienv && virtualenv kcenv`
     * tested with `CPython3.8.10.final.0-64`
-1. install os-level dependencies (sorry): `apt-get install python3-virtualenv gcc python3-dev gdal-bin`
+1. install os-level dependencies (sorry): `sudo apt install python3-virtualenv gcc python3-dev gdal-bin`
     * you'll also need docker and docker-compose; tested with docker 20.10.12,
       docker-compose 1.25.0
 1. set up a kpi (python) development environment!
@@ -103,9 +104,11 @@ minimum of mandatory customization.
         1. you'll also have to recreate user accounts
 
 ## nasties
+* some things just don't work without nginx (like serving attachments? need to
+  confirm)
 * periodic tasks (`celery beat`) are completely ignored for the sake of
   simplicity
-* `apt-get install gdal-bin` on the host unavoidable?
+* `apt install gdal-bin` on the host unavoidable?
 * "`pyuwsgi` is the exact same code as `uwsgi` but" actually has binary wheels?
     * it'd sure be nice not to compile uwsgi from source
         * then we could remove `gcc` and `python3-dev` requirements
@@ -120,3 +123,16 @@ minimum of mandatory customization.
       ERROR in Failed to load config "prettier" to extend from.
       Referenced from: /home/john/Local/kobo-dev/kpi/node_modules/kobo-common/src/configs/.eslintrc.js
       ```
+
+## can you use python 3.10?!
+sure.
+1. `sudo add-apt-repository ppa:deadsnakes/ppa`
+1. `sudo apt install python3.10-full python3.10-dev`
+1. `sudo apt install libpq-dev`, because psycopg2 >= 2.9
+   [breaks everything](https://stackoverflow.com/a/68025007/2402324) and no
+   `psycopg2-binary` exists for < 2.9 and Python 3.10
+    * having `psycopg2-binary==2.8.6` in the requirements, as the `.patch`
+      files do, should not cause a problem: `pip` will automatically fall back
+      to building from source
+1. create your virtualenv with `python3.10 -m venv kpienv3.10` instead of
+   `virtualenv kpienv`

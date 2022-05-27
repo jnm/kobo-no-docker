@@ -8,7 +8,7 @@ export REDIS_SESSION_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/0
 export KPI_BROKER_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/1
 export KOBOCAT_BROKER_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/10
 
-export KOBOFORM_URL="http://$IP:9000"
+export KOBOFORM_INTERNAL_URL="http://$IP:9000"
 export KOBOFORM_URL="$KOBOFORM_INTERNAL_URL"
 
 export KOBOCAT_INTERNAL_URL="http://$IP:9001"

@@ -34,6 +34,8 @@ minimum of mandatory customization.
 1. `virtualenv kpienv && virtualenv kcenv`
     * tested with `CPython3.8.10.final.0-64`
 1. install os-level dependencies (sorry): `sudo apt install python3-virtualenv gcc python3-dev gdal-bin`
+    * more about GDAL [here](https://chat.kobotoolbox.org/#narrow/stream/4-Kobo-Dev/topic/kpi.20py.20packages/near/119776)
+      (it's required during migrations. and it's only required then?)
     * you'll also need docker and docker-compose; tested with docker 20.10.12,
       docker-compose 1.25.0
 1. set up a kpi (python) development environment!

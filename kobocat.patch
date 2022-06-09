@@ -20,47 +20,11 @@ index 4d153b37e..61f6705b2 100644
  sentinels==1.0.0
      # via mongomock
  sentry-sdk==1.5.10
-diff --git a/dependencies/pip/requirements.in b/dependencies/pip/requirements.in
-index 94561b3fd..47f236760 100644
---- a/dependencies/pip/requirements.in
-+++ b/dependencies/pip/requirements.in
-@@ -6,9 +6,6 @@
- -e git+https://github.com/dimagi/python-digest@5c94bb74516b977b60180ee832765c0695ff2b56#egg=python_digest
- -e git+https://github.com/dimagi/django-digest@419f7306443f9a800b07d832b2cc147941062d59#egg=django_digest
- 
--# spss
--https://bitbucket.org/fomcl/savreaderwriter/downloads/savReaderWriter-3.3.0.zip#egg=savreaderwriter
--
- # ssrf
- -e git+https://github.com/kobotoolbox/ssrf-protect@9b97d3f0fd8f737a38dd7a6b64efeffc03ab3cdd#egg=ssrf_protect
- 
-diff --git a/onadata/apps/viewer/tests/test_export_builder.py b/onadata/apps/viewer/tests/test_export_builder.py
-index 0f82253c2..fd3af0a71 100644
---- a/onadata/apps/viewer/tests/test_export_builder.py
-+++ b/onadata/apps/viewer/tests/test_export_builder.py
-@@ -12,7 +12,6 @@ from django.core.files.temp import NamedTemporaryFile
- from django.utils.six import string_types
- from openpyxl import load_workbook
- from pyxform.builder import create_survey_from_xls
--from savReaderWriter import SavReader
- 
- from onadata.apps.api.mongo_helper import MongoHelper
- from onadata.apps.main.tests.test_base import TestBase
 diff --git a/onadata/settings/base.py b/onadata/settings/base.py
-index 3ea5fcea2..f5d127e75 100644
+index cf2d65df6..9f89ae29d 100644
 --- a/onadata/settings/base.py
 +++ b/onadata/settings/base.py
-@@ -350,7 +350,8 @@ DEBUG = env.bool('DJANGO_DEBUG', True)
- 
- # Database (i.e. PostgreSQL)
- DATABASES = {
--    'default': env.db(default="sqlite:///%s/db.sqlite3" % PROJECT_ROOT)
-+    # NOCOMMIT
-+    'default': env.db('KC_DATABASE_URL', default="sqlite:///%s/db.sqlite3" % PROJECT_ROOT)
- }
- # Replacement for TransactionMiddleware
- DATABASES['default']['ATOMIC_REQUESTS'] = True
-@@ -451,7 +452,7 @@ KOBOFORM_SERVER_PORT = env.str('KOBOFORM_SERVER_PORT', '8000')
+@@ -455,7 +455,7 @@ KOBOFORM_SERVER_PORT = env.str('KOBOFORM_SERVER_PORT', '8000')
  KOBOFORM_SERVER_PROTOCOL = env.str('KOBOFORM_SERVER_PROTOCOL', 'http')
  KOBOFORM_LOGIN_AUTOREDIRECT = True
  KOBOFORM_URL = env.url('KOBOFORM_URL', 'http://kf.kobo.local').geturl()

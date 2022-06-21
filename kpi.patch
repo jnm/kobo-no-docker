@@ -11,25 +11,11 @@ index 60b3b08ba..8bd9d20e1 100644
      # via -r dependencies/pip/requirements.in
  ptyprocess==0.7.0
      # via pexpect
-diff --git a/kobo/settings/base.py b/kobo/settings/base.py
-index 9f41eeeb7..039b4977b 100644
---- a/kobo/settings/base.py
-+++ b/kobo/settings/base.py
-@@ -322,7 +322,8 @@ SKIP_HEAVY_MIGRATIONS = env.bool('SKIP_HEAVY_MIGRATIONS', False)
- # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
- 
- DATABASES = {
--    'default': env.db(default="sqlite:///%s/db.sqlite3" % BASE_DIR),
-+    # NOCOMMIT
-+    'default': env.db('KPI_DATABASE_URL', default="sqlite:///%s/db.sqlite3" % BASE_DIR),
- }
- if 'KC_DATABASE_URL' in os.environ:
-     DATABASES['kobocat'] = env.db_url('KC_DATABASE_URL')
 diff --git a/package.json b/package.json
-index 8dc0d26e9..6ec7293e0 100644
+index 28153efdb..04927aaf0 100644
 --- a/package.json
 +++ b/package.json
-@@ -103,7 +106,7 @@
+@@ -106,7 +106,7 @@
      "lint": "eslint \"jsapp/js/**/*\" --ext .es6,.js,.jsx,.ts,.tsx",
      "show-icons": "opn jsapp/fonts/k-icons.html",
      "generate-icons": "node ./scripts/generate_icons.js",
@@ -38,4 +24,3 @@ index 8dc0d26e9..6ec7293e0 100644
    },
    "repository": "https://github.com/kobotoolbox/kpi.git",
    "author": "alex.dorey@kobotoolbox.org, esmail.fadae@kobotoolbox.org, john.milner@kobotoolbox.org",
-

@@ -12,7 +12,7 @@ minimum of mandatory customization.
 - [x] ~~celery always eager~~ done!
 - [x] enketo bad news `Parse Error: Expected HTTP/`
     * should be fixed by https://github.com/kobotoolbox/kpi/pull/3828
-    * apparently not completely? try opening offline form in a new tab
+    * ~~apparently not completely? try opening offline form in a new tab~~ fixed more by https://github.com/kobotoolbox/kobocat/pull/831
 
 ## oh no :scream:
 * some changes are currently needed to the kpi and kobocat codebases.

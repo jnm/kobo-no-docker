@@ -1,3 +1,5 @@
+this is **not** an official kobotoolbox repository, okay?
+
 # kobo (some) docker
 *fighting complexity ~~with simplicity~~ by making humans do more work*
 

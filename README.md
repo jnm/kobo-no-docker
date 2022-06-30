@@ -11,10 +11,7 @@ Python). I would like simplicity in configuration with sensible defaults and a
 minimum of mandatory customization.
 
 ## to do
-- [x] ~~celery always eager~~ done!
-- [x] enketo bad news `Parse Error: Expected HTTP/`
-    * should be fixed by https://github.com/kobotoolbox/kpi/pull/3828
-    * ~~apparently not completely? try opening offline form in a new tab~~ fixed more by https://github.com/kobotoolbox/kobocat/pull/831
+currently empty?!? :open_mouth:
 
 ## oh no :scream:
 * some changes are currently needed to the kpi and kobocat codebases.
@@ -113,6 +110,7 @@ minimum of mandatory customization.
 ## nasties
 * some things just don't work without nginx (like serving attachments? need to
   confirm)
+    * is ODK Collect able to make submissions at all?
 * periodic tasks (`celery beat`) are completely ignored for the sake of
   simplicity
 * `apt install gdal-bin` on the host unavoidable?
@@ -121,15 +119,9 @@ minimum of mandatory customization.
         * then we could remove `gcc` and `python3-dev` requirements
     * https://github.com/unbit/uwsgi/issues/1218#issuecomment-463681335
 * kpi copy fonts calls `python` not `python3` (fails; i have only `python2` and `python3`)
-* the wizard has not included a full inventory of his workshop
-    * eslint not installed by `npm install` in kpi
-    * `npm install --legacy-peer-deps eslint-plugin-react`
-    * `npm install` requires `--legacy-peer-deps`??? (v16)
-    * try installing prettier manually? (it didn't fix the issue)
-      ```
-      ERROR in Failed to load config "prettier" to extend from.
-      Referenced from: /home/john/Local/kobo-dev/kpi/node_modules/kobo-common/src/configs/.eslintrc.js
-      ```
+    * can be worked around by simply getting inside the kpi virtualenv before running
+      `npm run copy-fonts`
+* `npm install` always requires `--legacy-peer-deps`??? (v16)
 
 ## can you use python 3.10?!
 sure.

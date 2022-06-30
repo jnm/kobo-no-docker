@@ -1,0 +1,4 @@
+cd ..
+. kcenv/bin/activate
+. envfile
+cd ../kobocat

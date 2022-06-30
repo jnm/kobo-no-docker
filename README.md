@@ -55,14 +55,6 @@ currently empty?!? :open_mouth:
     1. `cd` into your kpi source directory
     1. `nvm use 16`, or whatever you cool kids like
     1. `npm install --legacy-peer-deps`
-    1. `npm install eslint eslint-plugin-react prettier --legacy-peer-deps`
-        * i'm sorry.
-        * also, installing prettier this way doesn't seem to solve
-          ```
-          ERROR in Failed to load config "prettier" to extend from.
-          ```
-        * terrible workaround: edit `node_modules/kobo-common/src/configs/.eslintrc.js`
-          and remove `, 'prettier'` from `extends: ['eslint:recommended', 'prettier'],`
     1. `npm run watch`
         * are you lucky today? i am! `webpack 5.72.0 compiled successfully in 30238 ms`
 1. set up a kobocat development environment!
@@ -94,6 +86,8 @@ currently empty?!? :open_mouth:
     1. you're generally responsible for knowing how to use
        `./manage.py migrate` to apply database migrations (or revert them, by
        migrating backwards)
+        * fyi, when going backwards, django lingo for the migration before
+          `0001` is `zero`
     1. let's say you'd like to back up your databases and start
        from scratch to avoid migration hassles:
         1. stop :warning: the database servers with `docker-compose stop`

@@ -24,16 +24,8 @@ export KC_DATABASE_URL=postgis://postgres:insecure-postgres-kobo-dev@10.6.6.1:60
 
 export EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
 
-export KPI_MONGO_HOST=10.6.6.1
-export KPI_MONGO_PORT=60668
-export KPI_MONGO_USER=kobo
-export KPI_MONGO_PASS=insecure-mongo-kobo-dev
-# The default is fine
-# export KPI_MONGO_NAME=formhub
-export KOBOCAT_MONGO_HOST="$KPI_MONGO_HOST"
-export KOBOCAT_MONGO_PORT="$KPI_MONGO_PORT"
-export KOBOCAT_MONGO_USER="$KPI_MONGO_USER"
-export KOBOCAT_MONGO_PASS="$KPI_MONGO_PASS"
+export MONGO_DB_NAME=formhub
+export MONGO_DB_URL="mongodb://kobo:insecure-mongo-kobo-dev@$IP:60668/$MONGO_DB_NAME"
 
 export DJANGO_LANGUAGE_CODES="en fr es ar zh-hans hi ku"
 

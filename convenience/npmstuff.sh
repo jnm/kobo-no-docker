@@ -10,7 +10,8 @@ cd ..
 . envfile
 cd ../kpi
 node < /dev/null || loadnvm && echo 'loaded node via nvm 🙂'
-npm install --legacy-peer-deps
+if [ "$1" == "--install" ]; then
+    npm install --legacy-peer-deps
+fi
 npm run copy-fonts
-npm run build
 npm run watch

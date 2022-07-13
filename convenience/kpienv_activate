@@ -1,4 +1,3 @@
-cd ..
-. kpienv/bin/activate
-. envfile
-cd ../kpi
+my_path=$(dirname "${BASH_SOURCE[0]}")
+. "$my_path/../kpienv/bin/activate"
+. "$my_path/../envfile"

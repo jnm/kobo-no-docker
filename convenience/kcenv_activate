@@ -1,4 +1,3 @@
-cd ..
-. kcenv/bin/activate
-. envfile
-cd ../kobocat
+my_path=$(dirname "${BASH_SOURCE[0]}")
+. "$my_path/../kcenv/bin/activate"
+. "$my_path/../envfile"

@@ -22,6 +22,8 @@ export ENKETO_API_TOKEN=insecure-enketo-kobo-dev
 export KPI_DATABASE_URL=postgis://postgres:insecure-postgres-kobo-dev@10.6.6.1:60666/koboform
 export KC_DATABASE_URL=postgis://postgres:insecure-postgres-kobo-dev@10.6.6.1:60666/kobocat
 
+export KOBOCAT_MEDIA_PATH=../kobocat/media
+
 export EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
 
 export MONGO_DB_NAME=formhub

@@ -26,6 +26,8 @@ currently empty?!? :open_mouth:
 ## getting started
 1. clone https://github.com/kobotoolbox/kpi and
    https://github.com/kobotoolbox/kobocat if you haven't already
+    * :warning: You must check out kpi and kobocat as siblings of the same
+      parent directory
 1. `docker-compose up`, which should yield:
     * enketo running on 10.6.6.1:9002
     * postgres, on 10.6.6.1:60666

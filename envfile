@@ -8,12 +8,14 @@ export REDIS_SESSION_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/0
 export KPI_BROKER_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/1
 export KOBOCAT_BROKER_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/10
 export CACHE_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/5
+export SERVICE_ACCOUNT_BACKEND_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/6
 
 export KOBOFORM_INTERNAL_URL="http://$IP:9000"
 export KOBOFORM_URL="$KOBOFORM_INTERNAL_URL"
 
 export KOBOCAT_INTERNAL_URL="http://$IP:9001"
 export KOBOCAT_URL="$KOBOCAT_INTERNAL_URL"
+export SERVICE_ACCOUNT_WHITELISTED_HOSTS="$IP:9001"
 
 export ENKETO_INTERNAL_URL="http://$IP:9002"
 export ENKETO_URL="$ENKETO_INTERNAL_URL"

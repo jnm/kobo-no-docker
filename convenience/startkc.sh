@@ -4,7 +4,7 @@ cd ..
 . envfile
 cd ../kobocat
 if [ "$1" == "--install" ]; then
-    pip-sync dependencies/pip/dev.txt
+    pip-sync dependencies/pip/dev_requirements.txt
 fi
 ./manage.py collectstatic --noinput
 ./manage.py runserver 10.6.6.1:9001

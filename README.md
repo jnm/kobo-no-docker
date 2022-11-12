@@ -66,8 +66,7 @@ currently empty?!? :open_mouth:
     1. `. envfile`
     1. `pip install pip-tools`
     1. `cd` into your kobocat source directory
-    1. `pip-sync dependencies/pip/dev.txt`
-        * HEY! how about we make that consistent with kpi, eh?
+    1. `pip-sync dependencies/pip/dev_requirements.txt`
     1. `./manage.py migrate`
     1. `./manage.py runserver 10.6.6.1:9001`
         * :nerd_face: didja see the `1` in `9001`?
@@ -118,7 +117,7 @@ currently empty?!? :open_mouth:
 * kpi copy fonts calls `python` not `python3` (fails; i have only `python2` and `python3`)
     * can be worked around by simply getting inside the kpi virtualenv before running
       `npm run copy-fonts`
-* `npm install` always requires `--legacy-peer-deps`??? (v16)
+* `npm install` always requires `--legacy-peer-deps`??? (needed above npm 8.5.5?)
 
 ## can you use python 3.10?!
 sure.

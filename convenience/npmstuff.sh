@@ -11,7 +11,7 @@ cd ..
 cd ../kpi
 node < /dev/null || loadnvm && echo 'loaded node via nvm 🙂'
 if [ "$1" == "--install" ]; then
-    npm install --legacy-peer-deps
+    npm install  # --legacy-peer-deps (needed above npm 8.5.5?)
 fi
 npm run copy-fonts
 npm run watch

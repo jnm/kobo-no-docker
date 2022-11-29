@@ -57,7 +57,8 @@ currently empty?!? :open_mouth:
     1. open a new terminal
     1. `cd` into your kpi source directory
     1. `nvm use 16`, or whatever you cool kids like
-    1. `npm install --legacy-peer-deps`
+    1. install npm version 8.5.5. downgrade if necessary.
+    1. `npm install`
     1. `npm run watch`
         * are you lucky today? i am! `webpack 5.72.0 compiled successfully in 30238 ms`
 1. set up a kobocat development environment!
@@ -117,7 +118,7 @@ currently empty?!? :open_mouth:
 * kpi copy fonts calls `python` not `python3` (fails; i have only `python2` and `python3`)
     * can be worked around by simply getting inside the kpi virtualenv before running
       `npm run copy-fonts`
-* `npm install` always requires `--legacy-peer-deps`??? (needed above npm 8.5.5?)
+* `npm install` above npm 8.5.5 always requires `--legacy-peer-deps`???
 
 ## can you use python 3.10?!
 sure.

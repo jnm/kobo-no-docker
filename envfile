@@ -4,11 +4,12 @@ export DJANGO_SECRET_KEY=insecure-django-kobo-dev
 export DJANGO_DEBUG=True
 export SKIP_CELERY=True
 
-export REDIS_SESSION_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/0
-export KPI_BROKER_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/1
-export KOBOCAT_BROKER_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/10
-export CACHE_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/5
-export SERVICE_ACCOUNT_BACKEND_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/6
+# Enketo uses Redis database number 0 and is not configurable
+export REDIS_SESSION_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/1
+export CACHE_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/2
+export KPI_BROKER_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/3
+export KOBOCAT_BROKER_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/4
+export SERVICE_ACCOUNT_BACKEND_URL=redis://:insecure-redis-kobo-dev@10.6.6.1:60667/5
 
 export KOBOFORM_INTERNAL_URL="http://$IP:9000"
 export KOBOFORM_URL="$KOBOFORM_INTERNAL_URL"

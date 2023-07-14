@@ -47,7 +47,7 @@ services:
       - 10.6.6.1:60668:27017
 
   enketo:
-    image: kobotoolbox/enketo-express-extra-widgets:6.0.0
+    image: kobotoolbox/enketo-express-extra-widgets:6.1.0
     depends_on:
       - redis
     volumes:
@@ -60,7 +60,7 @@ services:
     # pm2 doesn't have an explicit handler for SIGTERM and therefore doesn't
     # die when it's running as PID 1. `init: true` causes `tini`-based
     # `docker-init` to be used as PID 1 inside the container
-    #
+    # (remove after https://github.com/enketo/enketo-express/pull/571)
     init: true
     # In the future, we may use environment variables for configuration
     # instead of `config.json`. But not right now :)

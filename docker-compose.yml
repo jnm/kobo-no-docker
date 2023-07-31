@@ -74,10 +74,9 @@ services:
     #   ENKETO_REDIS_CACHE_URL: "redis://:insecure-redis-kobo-dev@10.6.6.7:60667/21"
     #   ENKETO_LINKED_FORM_AND_DATA_SERVER_API_KEY: insecure-enketo-kobo-dev
     #   ENKETO_LINKED_FORM_AND_DATA_SERVER_AUTHENTICATION_ALLOW_INSECURE_TRANSPORT: "true"
+    #   ENKETO_MAX_PROCESSES: 2
     #   # This looks like it doesn't work at all
     #   ENKETO_IP_FILTERING_ALLOWPRIVATEIPADDRESS: "true"
-    #   # In the future, once it's supported, set something like
-    #   #   ENKETO_MAX_PROCESSES: 2
 
 networks:
   default:

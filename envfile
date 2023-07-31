@@ -32,8 +32,6 @@ export EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
 export MONGO_DB_NAME=formhub
 export MONGO_DB_URL="mongodb://kobo:insecure-mongo-kobo-dev@$KOBO_IP:60668/$MONGO_DB_NAME"
 
-export DJANGO_LANGUAGE_CODES="en fr es ar zh-hans hi ku"
-
 # Is SSRF configuration needed to allow 10.x private addresses?
 
 # NLP: temporary storage for audio to be transcribed

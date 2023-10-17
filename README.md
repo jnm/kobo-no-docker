@@ -14,35 +14,30 @@ minimum of mandatory customization.
 ## to do
 currently empty?!? :open_mouth:
 
-## oh no :scream:
-* some changes are currently needed to the kpi and kobocat codebases.
-  `kpi.patch` and `kobocat.patch` in this repository contain those changes.
-  apply them with `git apply`; e.g. in your `kpi` source directory, run `git
-  apply < /path/to/kobo-no-docker/kpi.patch`. sorry.
-* you have to manually create the directory `jsapp/compiled` inside your `kpi`
-  source directory, otherwise `npm run watch` will fail on
-  `ExtractTranslationKeysPlugin` with a `ENOENT`
-
 ## getting started
 1. clone https://github.com/kobotoolbox/kpi and
    https://github.com/kobotoolbox/kobocat if you haven't already
     * :warning: You must check out kpi and kobocat as siblings of the same
       parent directory
 1. `docker-compose up`, which should yield:
+    * nginx listening at 10.6.6.1 on ports 9000 and 9001
+        * these will reverse-proxy to kpi and kobocat, respectively, because
+          these applications do not run properly without nginx
     * enketo running on 10.6.6.1:9002
     * postgres, on 10.6.6.1:60666
     * redis, on 10.6.6.1:60667
     * mongo, on 10.6.6.1:60668
-1. `virtualenv kpienv && virtualenv kcenv`
-    * tested with `CPython3.8.10.final.0-64`
-1. install os-level dependencies (sorry): `sudo apt install python3-virtualenv gcc python3-dev gdal-bin libsqlite3-mod-spatialite`
+1. install os-level dependencies (sorry):
+   `sudo apt install python3.10-venv gcc python3-dev gdal-bin libpq-dev libsqlite3-mod-spatialite`
     * more about GDAL [here](https://chat.kobotoolbox.org/#narrow/stream/4-Kobo-Dev/topic/kpi.20py.20packages/near/119776)
       (it's required during migrations. and it's only required then?)
     * `libsqlite3-mod-spatialite` is needed to run kobocat tests, or perhaps
       you could set `TEST_DATABASE_URL` and run them against a real Postgres
       database instead
-    * you'll also need docker and docker-compose; tested with docker 20.10.12,
-      docker-compose 1.25.0
+    * you'll also need docker and docker-compose; tested with docker 20.10.21,
+      docker-compose 1.29.2
+1. `python3 -m venv kpienv && python3 -m venv kcenv`
+    * tested with Python 3.10.8 on Ubuntu 22.04
 1. set up a kpi (python) development environment!
     1. open a new terminal
     1. `. kpienv/bin/activate`
@@ -51,12 +46,15 @@ currently empty?!? :open_mouth:
     1. `cd` into your kpi source directory
     1. `pip-sync dependencies/pip/dev_requirements.txt`
     1. `./manage.py migrate`
-    1. `./manage.py runserver 10.6.6.1:9000`
+    1. `./manage.py runserver 10.6.6.1:9010`
         * :warning: not just any ol' `runserver`, okay?
 1. set up a kpi (javascript) development environment!
     1. open a new terminal
+    1. `. kpienv/bin/activate` (works around an
+       [annoyance](https://github.com/kobotoolbox/kpi/pull/4541) in the
+       `copy-fonts` npm script)
     1. `cd` into your kpi source directory
-    1. `nvm use 16`, or whatever you cool kids like
+    1. `nvm use 16.15.0`, or whatever you cool kids like
     1. install npm version 8.5.5. downgrade if necessary.
     1. `npm install`
     1. `npm run watch`
@@ -69,17 +67,17 @@ currently empty?!? :open_mouth:
     1. `cd` into your kobocat source directory
     1. `pip-sync dependencies/pip/dev_requirements.txt`
     1. `./manage.py migrate`
-    1. `./manage.py runserver 10.6.6.1:9001`
-        * :nerd_face: didja see the `1` in `9001`?
+    1. `./manage.py runserver 10.6.6.1:9011`
+        * :nerd_face: didja see the final `1` in `9011`?
 
 :pie: "don't forget to manage your pie"
 
 ## hints
 1. django is set to use the console email backend, so you can do things like
    create user accounts and read the activation email details right from the
-   output of `./manage.py runserver 10.6.6.1:9000`
+   output of `./manage.py runserver 10.6.6.1:9010`
 1. it might also be helpful to have a superuser account:
-    1. go to the terminal where kpi `./manage.py runserver 10.6.6.1:9000` is
+    1. go to the terminal where kpi `./manage.py runserver 10.6.6.1:9010` is
        running
     1. press ctrl+z to suspend `runserver`
     1. `./manage.py createsuperuser`
@@ -105,9 +103,6 @@ currently empty?!? :open_mouth:
         1. you'll also have to recreate user accounts
 
 ## nasties
-* some things just don't work without nginx (like serving attachments? need to
-  confirm)
-    * is ODK Collect able to make submissions at all?
 * periodic tasks (`celery beat`) are completely ignored for the sake of
   simplicity
 * `apt install gdal-bin` on the host unavoidable?
@@ -115,9 +110,15 @@ currently empty?!? :open_mouth:
     * it'd sure be nice not to compile uwsgi from source
         * then we could remove `gcc` and `python3-dev` requirements
     * https://github.com/unbit/uwsgi/issues/1218#issuecomment-463681335
+* `psycopg2-binary` ["is a practical choice for development and testing but in
+  production it is advised to use the package built from sources."](https://github.com/psycopg/psycopg2#installation)
+    * the "why" is described [here](https://web.archive.org/web/20201111224247/https://www.psycopg.org/articles/2018/02/08/psycopg-274-released/)
+    * for now, this means `libpq-dev` must be installed to avoid messing with
+      Python requirements
 * kpi copy fonts calls `python` not `python3` (fails; i have only `python2` and `python3`)
     * can be worked around by simply getting inside the kpi virtualenv before running
       `npm run copy-fonts`
+    * PR to remove this annoyance: https://github.com/kobotoolbox/kpi/pull/4541
 * `npm install` above npm 8.5.5 always requires `--legacy-peer-deps`???
 
 ## can you use python 3.10?!

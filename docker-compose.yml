@@ -47,7 +47,7 @@ services:
       - 10.6.6.1:60668:27017
 
   enketo:
-    image: kobotoolbox/enketo-express-extra-widgets:6.1.0
+    image: kobotoolbox/enketo-express-extra-widgets:6.2.2
     depends_on:
       - redis
     volumes:

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-NODE_VERSION='v16'
+NODE_VERSION='v16.15.0'
 NPM_VERSION='8.5.5'
 
 loadnvm ()

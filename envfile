@@ -11,6 +11,9 @@ export KPI_BROKER_URL=redis://:insecure-redis-kobo-dev@$KOBO_IP:60667/3
 export KOBOCAT_BROKER_URL=redis://:insecure-redis-kobo-dev@$KOBO_IP:60667/4
 export SERVICE_ACCOUNT_BACKEND_URL=redis://:insecure-redis-kobo-dev@$KOBO_IP:60667/5
 
+# This is used by KPI to access Enketo's database
+export ENKETO_REDIS_MAIN_URL=redis://:insecure-redis-kobo-dev@$KOBO_IP:60667/0
+
 export KOBOFORM_INTERNAL_URL="http://$KOBO_IP:9000"
 export KOBOFORM_URL="$KOBOFORM_INTERNAL_URL"
 

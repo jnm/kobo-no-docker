@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-NODE_VERSION='v16.15.0'
-NPM_VERSION='8.5.5'
+NODE_VERSION='v20.17.0'
+NPM_VERSION='10.8.2'
 
 loadnvm ()
 {

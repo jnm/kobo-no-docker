@@ -54,8 +54,7 @@ currently empty?!? :open_mouth:
        [annoyance](https://github.com/kobotoolbox/kpi/pull/4541) in the
        `copy-fonts` npm script)
     1. `cd` into your kpi source directory
-    1. `nvm use 16.15.0`, or whatever you cool kids like
-    1. install npm version 8.5.5. downgrade if necessary.
+    1. `nvm use 20.17.0`, or whatever you cool kids like
     1. `npm install`
     1. `npm run watch`
         * are you lucky today? i am! `webpack 5.72.0 compiled successfully in 30238 ms`

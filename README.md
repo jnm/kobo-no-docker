@@ -25,13 +25,13 @@ currently empty?!? :open_mouth:
     * redis, on 10.6.6.1:60667
     * mongo, on 10.6.6.1:60668
 1. install os-level dependencies (sorry):
-   `sudo apt install python3.10-venv gcc python3-dev gdal-bin libpq-dev`
+   `sudo apt install python3.12-venv gcc python3-dev gdal-bin libpq-dev`
     * more about GDAL [here](https://chat.kobotoolbox.org/#narrow/stream/4-Kobo-Dev/topic/kpi.20py.20packages/near/119776)
       (it's required during migrations. and it's only required then?)
     * you'll also need docker and the compose plugin; tested with docker
       27.2.1 and compose 2.29.2
 1. `python3 -m venv kpienv`
-    * tested with Python 3.10.12 on Ubuntu 22.04
+    * tested with Python 3.12.3 on Ubuntu 24.04
 1. set up a **python** development environment for kpi!
     1. `. kpienv/bin/activate`
     1. `. envfile`

@@ -1,10 +1,10 @@
 services:
   postgres:
-    image: postgis/postgis:14-3.2
+    image: postgis/postgis:18-3.6
     environment:
       POSTGRES_PASSWORD: insecure-postgres-kobo-dev
     volumes:
-      - ./storage/postgres:/var/lib/postgresql/data
+      - ./storage/postgres:/var/lib/postgresql
       # Used to create two databases; see
       # https://github.com/docker-library/docs/tree/b56d2dd13bee760cb7a569969f0f7d0c71e1f637/postgres#initialization-scripts
       - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
@@ -15,7 +15,7 @@ services:
       - 10.6.6.1:60666:5432
 
   redis:
-    image: redis
+    image: redis:8
     volumes:
       - ./storage/redis:/data
     command: --requirepass insecure-redis-kobo-dev
@@ -26,7 +26,7 @@ services:
       - 10.6.6.1:60667:6379
 
   mongo:
-    image: mongo:5.0.8
+    image: mongo:8
     environment:
       # HELLO: the root user only gets created in the `admin` database and
       # cannot authenticate to other databases like `formhub`
@@ -45,13 +45,13 @@ services:
       - 10.6.6.1:60668:27017
 
   enketo:
-    image: kobotoolbox/enketo-express-extra-widgets:6.2.2
+    image: kobotoolbox/enketo-express-extra-widgets:7.6.1-fix-20260508
     depends_on:
       - redis
     volumes:
-      - ./enketo/config.json:/srv/src/enketo_express/config/config.json
+      - ./enketo/config.json:/srv/src/enketo/packages/enketo-express/config/config.json
     ports:
-      - "10.6.6.1:9002:8005"
+      - "10.6.6.1:9001:8005"
     networks:
       default:
         ipv4_address: 10.6.6.9

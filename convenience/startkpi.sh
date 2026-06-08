@@ -3,8 +3,9 @@ cd ..
 . kpienv/bin/activate
 . envfile
 cd ../kpi
+#cd /tmp/kpi
 if [ "$1" == "--install" ]; then
-    pip-sync dependencies/pip/dev_requirements.txt
+    uv pip sync dependencies/pip/dev_requirements.txt
 fi
 ./manage.py collectstatic --noinput
 echo -ne "\033[7m"

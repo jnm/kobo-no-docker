@@ -13,7 +13,6 @@ export PUBLIC_REQUEST_SCHEME=http
 export REDIS_SESSION_URL=redis://:insecure-redis-kobo-dev@$KOBO_IP:60667/1
 export CACHE_URL=redis://:insecure-redis-kobo-dev@$KOBO_IP:60667/2
 export KPI_BROKER_URL=redis://:insecure-redis-kobo-dev@$KOBO_IP:60667/3
-export KOBOCAT_BROKER_URL=redis://:insecure-redis-kobo-dev@$KOBO_IP:60667/4
 export SERVICE_ACCOUNT_BACKEND_URL=redis://:insecure-redis-kobo-dev@$KOBO_IP:60667/5
 
 # This is used by KPI to access Enketo's database
@@ -22,9 +21,8 @@ export ENKETO_REDIS_MAIN_URL=redis://:insecure-redis-kobo-dev@$KOBO_IP:60667/0
 export KOBOFORM_INTERNAL_URL="http://$KOBO_IP:9000"
 export KOBOFORM_URL="$KOBOFORM_INTERNAL_URL"
 
-export KOBOCAT_INTERNAL_URL="http://$KOBO_IP:9001"
+export KOBOCAT_INTERNAL_URL="$KOBOFORM_INTERNAL_URL"
 export KOBOCAT_URL="$KOBOCAT_INTERNAL_URL"
-export SERVICE_ACCOUNT_WHITELISTED_HOSTS="$KOBO_IP:9001"
 
 export ENKETO_INTERNAL_URL="http://$KOBO_IP:9002"
 export ENKETO_URL="$ENKETO_INTERNAL_URL"
@@ -33,7 +31,7 @@ export ENKETO_API_TOKEN=insecure-enketo-kobo-dev
 export KPI_DATABASE_URL=postgis://postgres:insecure-postgres-kobo-dev@$KOBO_IP:60666/koboform
 export KC_DATABASE_URL=postgis://postgres:insecure-postgres-kobo-dev@$KOBO_IP:60666/kobocat
 
-export KOBOCAT_MEDIA_PATH=../kobocat/media
+export KOBOCAT_MEDIA_ROOT=../kobocat/media
 
 export EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
 

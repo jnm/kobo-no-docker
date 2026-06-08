@@ -80,11 +80,10 @@ services:
     image: nginx
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./storage/kobocat/media:/mnt/kobocat/media
+      - ./storage/openrosa/media:/mnt/openrosa/media
       - ./storage/kpi/media/__public:/mnt/kpi/media/__public
     ports:
       - "10.6.6.1:9000:9000"
-      - "10.6.6.1:9001:9001"
 
 networks:
   default:

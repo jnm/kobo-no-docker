@@ -7,67 +7,47 @@ this is **not** an official kobotoolbox repository, okay?
 ## goal
 As a developer, I would like to run things I don't change inside Docker
 (PostgreSQL, Redis, MongoDB, and—for now—Enketo Express). I would like full,
-manual control over running code that I do change (kpi Python, kpi JS, kobocat
-Python). I would like simplicity in configuration with sensible defaults and a
-minimum of mandatory customization.
+manual control over running code that I do change (kpi Python and kpi JS). I
+would like simplicity in configuration with sensible defaults and a minimum of
+mandatory customization.
 
 ## to do
 currently empty?!? :open_mouth:
 
 ## getting started
-1. clone https://github.com/kobotoolbox/kpi and
-   https://github.com/kobotoolbox/kobocat if you haven't already
-    * :warning: You must check out kpi and kobocat as siblings of the same
-      parent directory
+1. clone https://github.com/kobotoolbox/kpi if you haven't already
 1. `docker-compose up`, which should yield:
-    * nginx listening at 10.6.6.1 on ports 9000 and 9001
-        * these will reverse-proxy to kpi and kobocat, respectively, because
-          these applications do not run properly without nginx
-    * enketo running on 10.6.6.1:9002
+    * nginx listening at 10.6.6.1 on port 9000
+        * this will reverse-proxy to kpi because the application does not run
+          properly without nginx
+    * enketo running on 10.6.6.1:9001
     * postgres, on 10.6.6.1:60666
     * redis, on 10.6.6.1:60667
     * mongo, on 10.6.6.1:60668
 1. install os-level dependencies (sorry):
-   `sudo apt install python3.10-venv gcc python3-dev gdal-bin libpq-dev libsqlite3-mod-spatialite`
+   `sudo apt install python3.10-venv gcc python3-dev gdal-bin libpq-dev`
     * more about GDAL [here](https://chat.kobotoolbox.org/#narrow/stream/4-Kobo-Dev/topic/kpi.20py.20packages/near/119776)
       (it's required during migrations. and it's only required then?)
-    * `libsqlite3-mod-spatialite` is needed to run kobocat tests, or perhaps
-      you could set `TEST_DATABASE_URL` and run them against a real Postgres
-      database instead
-    * you'll also need docker and docker-compose; tested with docker 20.10.21,
-      docker-compose 1.29.2
-1. `python3 -m venv kpienv && python3 -m venv kcenv`
-    * tested with Python 3.10.8 on Ubuntu 22.04
-1. set up a kpi (python) development environment!
-    1. open a new terminal
+    * you'll also need docker and the compose plugin; tested with docker
+      27.2.1 and compose 2.29.2
+1. `python3 -m venv kpienv`
+    * tested with Python 3.10.12 on Ubuntu 22.04
+1. set up a **python** development environment for kpi!
     1. `. kpienv/bin/activate`
     1. `. envfile`
     1. `pip install pip-tools`
     1. `cd` into your kpi source directory
     1. `pip-sync dependencies/pip/dev_requirements.txt`
-    1. `./manage.py migrate`
+    1. `scripts/migrate.sh`
     1. `./manage.py runserver 10.6.6.1:9010`
         * :warning: not just any ol' `runserver`, okay?
-1. set up a kpi (javascript) development environment!
+1. set up a **javascript** development environment for kpi!
     1. open a new terminal
-    1. `. kpienv/bin/activate` (works around an
-       [annoyance](https://github.com/kobotoolbox/kpi/pull/4541) in the
-       `copy-fonts` npm script)
     1. `cd` into your kpi source directory
     1. `nvm use 20.17.0`, or whatever you cool kids like
     1. `npm install`
     1. `npm run watch`
-        * are you lucky today? i am! `webpack 5.72.0 compiled successfully in 30238 ms`
-1. set up a kobocat development environment!
-    1. open a new terminal
-    1. `. kcenv/bin/activate`
-    1. `. envfile`
-    1. `pip install pip-tools`
-    1. `cd` into your kobocat source directory
-    1. `pip-sync dependencies/pip/dev_requirements.txt`
-    1. `./manage.py migrate`
-    1. `./manage.py runserver 10.6.6.1:9011`
-        * :nerd_face: didja see the final `1` in `9011`?
+        * are you lucky today? i am! `webpack 5.92.1 compiled successfully in 16285 ms`
 
 :pie: "don't forget to manage your pie"
 
@@ -84,8 +64,8 @@ currently empty?!? :open_mouth:
        the foreground
 1. help! i want to switch branches!
     1. you're generally responsible for knowing how to use
-       `./manage.py migrate` to apply database migrations (or revert them, by
-       migrating backwards)
+       `./manage.py migrate` and its wrapper `scripts/migrate.sh` to apply
+       database migrations (or revert them, by migrating backwards)
         * fyi, when going backwards, django lingo for the migration before
           `0001` is `zero`
     1. let's say you'd like to back up your databases and start
@@ -94,11 +74,7 @@ currently empty?!? :open_mouth:
         1. rename the `storage` directory to something else
         1. restart the database servers with `docker-compose up`
         1. check out the new branch you'd like to use
-        1. for both kpi and kobocat, as described above, re-run
-           `./manage.py migrate`
-            * since you're starting from a completely empty database,
-              you have to migrate both applications even if you only changed
-              the branch for one of them
+        1. re-run `scripts/migrate.sh`
         1. you'll also have to recreate user accounts
 
 ## nasties
@@ -114,21 +90,3 @@ currently empty?!? :open_mouth:
     * the "why" is described [here](https://web.archive.org/web/20201111224247/https://www.psycopg.org/articles/2018/02/08/psycopg-274-released/)
     * for now, this means `libpq-dev` must be installed to avoid messing with
       Python requirements
-* kpi copy fonts calls `python` not `python3` (fails; i have only `python2` and `python3`)
-    * can be worked around by simply getting inside the kpi virtualenv before running
-      `npm run copy-fonts`
-    * PR to remove this annoyance: https://github.com/kobotoolbox/kpi/pull/4541
-* `npm install` above npm 8.5.5 always requires `--legacy-peer-deps`???
-
-## can you use python 3.10?!
-sure.
-1. `sudo add-apt-repository ppa:deadsnakes/ppa`
-1. `sudo apt install python3.10-full python3.10-dev`
-1. `sudo apt install libpq-dev`, because psycopg2 >= 2.9
-   [breaks everything](https://stackoverflow.com/a/68025007/2402324) and no
-   `psycopg2-binary` exists for < 2.9 and Python 3.10
-    * having `psycopg2-binary==2.8.6` in the requirements, as the `.patch`
-      files do, should not cause a problem: `pip` will automatically fall back
-      to building from source
-1. create your virtualenv with `python3.10 -m venv kpienv3.10` instead of
-   `virtualenv kpienv`
